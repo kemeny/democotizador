@@ -1,0 +1,11 @@
+id,name,description,price,unit,category
+1,Laptop HP Pavilion,Laptop HP Pavilion 15 pulgadas 8GB RAM,850000,unidad,Tecnología
+2,Mouse Inalámbrico,Mouse inalámbrico ergonómico con receptor USB,25000,unidad,Tecnología
+3,Teclado Mecánico,Teclado mecánico retroiluminado switches azules,75000,unidad,Tecnología
+4,Monitor 24",Monitor LED 24 pulgadas Full HD,180000,unidad,Tecnología
+5,Webcam HD,Webcam 1080p con micrófono integrado,45000,unidad,Tecnología
+6,Auriculares Bluetooth,Auriculares inalámbricos con cancelación de ruido,120000,unidad,Audio
+7,Parlante Portátil,Parlante Bluetooth resistente al agua,65000,unidad,Audio
+8,Cargador Universal,Cargador universal USB-C 65W,35000,unidad,Accesorios
+9,Cable HDMI,Cable HDMI 4K 2 metros,15000,unidad,Accesorios
+10,Disco Duro Externo,Disco duro externo 1TB USB 3.0,95000,unidad,Almacenamiento 
