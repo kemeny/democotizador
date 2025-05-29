@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuote } from '@/context/QuoteContext';
+import { sanitizeText } from '@/utils/sanitize';
 
 export default function QuotePage() {
   const router = useRouter();
@@ -45,11 +46,18 @@ export default function QuotePage() {
 
   const generatePDF = async () => {
     setIsGeneratingPDF(true);
-    
+
     try {
       // Importar jsPDF dinámicamente
       const { jsPDF } = await import('jspdf');
       const doc = new jsPDF();
+
+      const sanitizedCustomer = {
+        name: sanitizeText(customerInfo.name).slice(0, 100),
+        email: sanitizeText(customerInfo.email).slice(0, 100),
+        phone: sanitizeText(customerInfo.phone).slice(0, 30),
+        company: sanitizeText(customerInfo.company).slice(0, 100)
+      };
 
       // Configuración
       const pageWidth = doc.internal.pageSize.width;
@@ -74,26 +82,26 @@ export default function QuotePage() {
       yPosition += 25;
 
       // Customer Info
-      if (customerInfo.name || customerInfo.company) {
+      if (sanitizedCustomer.name || sanitizedCustomer.company) {
         doc.setFont('helvetica', 'bold');
         doc.text('CLIENTE:', margin, yPosition);
         yPosition += 10;
-        
+
         doc.setFont('helvetica', 'normal');
-        if (customerInfo.company) {
-          doc.text(customerInfo.company, margin, yPosition);
+        if (sanitizedCustomer.company) {
+          doc.text(sanitizedCustomer.company, margin, yPosition);
           yPosition += 8;
         }
-        if (customerInfo.name) {
-          doc.text(customerInfo.name, margin, yPosition);
+        if (sanitizedCustomer.name) {
+          doc.text(sanitizedCustomer.name, margin, yPosition);
           yPosition += 8;
         }
-        if (customerInfo.email) {
-          doc.text(customerInfo.email, margin, yPosition);
+        if (sanitizedCustomer.email) {
+          doc.text(sanitizedCustomer.email, margin, yPosition);
           yPosition += 8;
         }
-        if (customerInfo.phone) {
-          doc.text(customerInfo.phone, margin, yPosition);
+        if (sanitizedCustomer.phone) {
+          doc.text(sanitizedCustomer.phone, margin, yPosition);
           yPosition += 8;
         }
         yPosition += 15;

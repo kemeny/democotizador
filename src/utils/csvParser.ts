@@ -1,5 +1,6 @@
 import Papa from 'papaparse';
 import { Product } from '@/types/product';
+import { sanitizeText, sanitizeNumber } from './sanitize';
 
 export const parseCSV = (file: File): Promise<Product[]> => {
   return new Promise((resolve, reject) => {
@@ -9,12 +10,12 @@ export const parseCSV = (file: File): Promise<Product[]> => {
       complete: (results) => {
         try {
           const products: Product[] = (results.data as Record<string, unknown>[]).map((row, index: number) => ({
-            id: (row.id as string) || `product-${index}`,
-            name: (row.name as string) || (row.nombre as string) || '',
-            description: (row.description as string) || (row.descripcion as string) || '',
-            price: parseFloat((row.price as string) || (row.precio as string) || '0'),
-            unit: (row.unit as string) || (row.unidad as string) || 'unidad',
-            category: (row.category as string) || (row.categoria as string) || 'General'
+            id: sanitizeText(row.id) || `product-${index}`,
+            name: sanitizeText(row.name || row.nombre),
+            description: sanitizeText(row.description || row.descripcion),
+            price: sanitizeNumber(row.price || row.precio),
+            unit: sanitizeText(row.unit || row.unidad) || 'unidad',
+            category: sanitizeText(row.category || row.categoria) || 'General'
           }));
           
           // Filtrar productos válidos
