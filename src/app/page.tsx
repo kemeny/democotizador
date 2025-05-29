@@ -224,7 +224,7 @@ export default function Home() {
 
       {/* Mobile Cart Modal */}
       {showCart && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 lg:hidden">
+        <div className="fixed inset-0 bg-black/50 z-50 lg:hidden">
           <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-lg max-h-[80vh] overflow-hidden">
             <div className="p-4 border-b border-gray-200 flex items-center justify-between">
               <h3 className="font-semibold text-gray-900">Cotización</h3>
