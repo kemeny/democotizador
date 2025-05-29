@@ -18,6 +18,15 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [showCart, setShowCart] = useState(false);
 
+  // Disable body scroll when mobile cart is open
+  useEffect(() => {
+    if (showCart) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [showCart]);
+
   // Cargar productos de ejemplo al inicio
   useEffect(() => {
     loadExampleProducts();
