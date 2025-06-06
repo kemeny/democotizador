@@ -18,6 +18,15 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [showCart, setShowCart] = useState(false);
 
+  // Disable body scroll when mobile cart is open
+  useEffect(() => {
+    if (showCart) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [showCart]);
+
   // Cargar productos de ejemplo al inicio
   useEffect(() => {
     loadExampleProducts();
@@ -224,7 +233,7 @@ export default function Home() {
 
       {/* Mobile Cart Modal */}
       {showCart && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 lg:hidden">
+        <div className="fixed inset-0 bg-black/50 z-50 lg:hidden">
           <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-lg max-h-[80vh] overflow-hidden">
             <div className="p-4 border-b border-gray-200 flex items-center justify-between">
               <h3 className="font-semibold text-gray-900">Cotización</h3>
